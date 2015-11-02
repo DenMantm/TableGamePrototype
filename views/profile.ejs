@@ -1,0 +1,71 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>Table-Game-Portal</title>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script src='jquery-1.11.3.js'></script>
+	
+	<link rel="stylesheet" href="bootstrap.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<script>
+
+var socket = io.connect('/');
+//on connect informs
+socket.on("connect",function(){
+	console.log('connected');
+	console.log(socket.id);
+});
+//listens for disconnection
+socket.on("disconnect",function(){
+	console.log('disconnected');
+});
+//listen for new conn, disconn
+socket.on('conn',function(id){
+	console.log('connected'+id);
+});
+socket.on('disconn',function(id){
+	console.log('disconnected'+id);
+});
+
+setInterval(function(){
+	//check if new users are connected
+
+},500);
+
+
+</script>
+
+<div class="container">
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+	<div class="row">
+		<!-- LOCAL INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Local</h3>
+					<p>
+						<strong>id</strong>: <%= user._id %><br>
+						<strong>email</strong>: <%= user.local.email %><br>
+						<strong>password</strong>: <%= user.local.password %>
+					</p>
+
+			</div>
+		</div>
+		<div class="col-sm-6" id='connected'>
+
+
+		</div>
+
+	</div>
+
+</div>
+</body>
+</html>
